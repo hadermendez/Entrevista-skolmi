@@ -1,0 +1,15 @@
+body{
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    background-image: url("https://skolmi.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FBanner-Home-End.519a4556.png&w=1920&q=75");
+    background-repeat: no-repeat;
+}
+#crear{
+    display: grid;
+    justify-content: start;
+}
+
+
+
+
