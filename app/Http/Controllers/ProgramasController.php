@@ -47,10 +47,11 @@ class ProgramasController extends Controller
             'programa_id' =>$request->input('programa')
         ]);
 
-        return redirect()->action('\App\Http\Controllers\ProgramasController@detail',[
-            'id' =>$request->input('programa')
-        ]);
+        return redirect()->action('\App\Http\Controllers\ProgramasController@show')->with('status','Inscripcion creada');;
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.

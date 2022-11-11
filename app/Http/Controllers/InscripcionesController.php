@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inscripciones;
 use App\Http\Requests\StoreInscripcionesRequest;
 use App\Http\Requests\UpdateInscripcionesRequest;
-
+use Illuminate\Support\Facades\DB;
 class InscripcionesController extends Controller
 {
     /**
@@ -29,6 +29,14 @@ class InscripcionesController extends Controller
         //
     }
 
+
+
+    public function delete($id)
+    {
+        $inscripciones = DB::table('inscripciones')->where('id_inscripcion',$id)->delete();
+        return redirect()->action('\App\Http\Controllers\ProgramasController@show')->with('status','Incripcion eliminada');
+
+    }
     /**
      * Store a newly created resource in storage.
      *
