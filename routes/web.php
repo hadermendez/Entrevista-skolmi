@@ -18,6 +18,8 @@ Route::get('/programas','\App\Http\Controllers\ProgramasController@show');
 Route::get('/programas/detail/{id?}','\App\Http\Controllers\ProgramasController@detail');
 Route::get('/programas/crear','\App\Http\Controllers\ProgramasController@create');
 Route::post('/programas/save','\App\Http\Controllers\ProgramasController@save');
+Route::get('/programas/inscripciones','\App\Http\Controllers\InscripcionesController@index');
+
 
 
 

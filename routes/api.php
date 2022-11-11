@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('programas',"\App\Http\Controllers\ProgramasController");
+Route::apiResource('/programas',"\App\Http\Controllers\InscripcionesController@index");
+Route::apiResource('/inscripciones',"\App\Http\Controllers\InscripcionesController@index");
