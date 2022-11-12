@@ -39,6 +39,7 @@ class ProgramasController extends Controller
     }
     public function save(Request $request)
     {
+
         $fecha = date('Y-m-d H:i:s');
 
          $inscripcion = DB::table('inscripciones')->insert([

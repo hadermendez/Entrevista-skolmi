@@ -6,6 +6,8 @@ use App\Models\Inscripciones;
 use App\Http\Requests\StoreInscripcionesRequest;
 use App\Http\Requests\UpdateInscripcionesRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
 class InscripcionesController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class InscripcionesController extends Controller
     public function delete($id)
     {
         $inscripciones = DB::table('inscripciones')->where('id_inscripcion',$id)->delete();
-        return redirect()->action('\App\Http\Controllers\ProgramasController@show')->with('status','Incripcion eliminada');
+        return redirect()->action('\App\Http\Controllers\InscripcionesController@show')->with('status','Incripcion eliminada');
 
     }
     /**
@@ -56,18 +58,26 @@ class InscripcionesController extends Controller
      */
     public function show(Inscripciones $inscripciones)
     {
-        //
+        $inscripciones =DB::table('inscripciones')->get();
+
+        return view('programa.index',[
+            'inscripciones' => $inscripciones
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Inscripciones  $inscripciones
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Inscripciones $inscripciones)
+    public function edit($id)
     {
-        //
+        $inscripcion = DB::table('inscripciones')->where('id_inscripcion',$id)->first();
+
+      return view('programa.create',[
+            'inscripcion'=> $inscripcion
+        ]);
     }
 
     /**
@@ -77,9 +87,17 @@ class InscripcionesController extends Controller
      * @param  \App\Models\Inscripciones  $inscripciones
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateInscripcionesRequest $request, Inscripciones $inscripciones)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $inscripcion = DB::table('inscripciones')->where('id_inscripcion',$id)
+            ->update([
+                'beneficiario'=>$request->input('nombre'),
+                'programa_id'=>$request->input('programa_id')
+            ]);
+        return redirect()->action('\App\Http\Controllers\InscripcionesController@show')
+                                ->with('status','Incripcion Editada');
+
     }
 
     /**

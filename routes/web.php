@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','\App\Http\Controllers\ProgramasController@show');
 
 Route::get('/inscripciones','\App\Http\Controllers\InscripcionesController@index');
+Route::get('/inscripciones-view','\App\Http\Controllers\InscripcionesController@show');
+
 Route::get('/inscripciones-delete/{id?}','\App\Http\Controllers\InscripcionesController@delete');
+Route::get('/inscripciones-edit/{id?}','\App\Http\Controllers\InscripcionesController@edit');
+Route::post('/inscripciones-update','\App\Http\Controllers\InscripcionesController@update');
+
+
 
 Route::get('/programas','\App\Http\Controllers\ProgramasController@show');
 Route::get('/programas/detail/{id?}','\App\Http\Controllers\ProgramasController@detail');

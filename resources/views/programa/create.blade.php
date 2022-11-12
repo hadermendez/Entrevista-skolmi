@@ -13,20 +13,44 @@
 
    </style>
 </head>
-<h1>Ingresar</h1>
-<form action="{{ action('\App\Http\Controllers\ProgramasController@save') }}" method="POST" id="crear">
-    {{ csrf_field() }}
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre">
-    <br><label for="programa">Programa</label>
-    <select name="programa">
+@if(isset($inscripcion) && is_object($inscripcion))
+    <h1>Editar</h1>
 
-            @foreach($programas as $programa)
-            <option value={{ $programa->id_programa}}>
-                {{ $programa->nombre}}
-            </option>
-            @endforeach
-    </select>
+
+@else
+<h1>Ingresar</h1>
+
+@endif
+
+         <form action="{{ isset($inscripcion) ?
+                        action('\App\Http\Controllers\InscripcionesController@update') :
+                        action('\App\Http\Controllers\ProgramasController@save') }}"  method="POST" id="crear">
+
+    {{ csrf_field() }}
+
+             <label for="nombre">Nombre</label>
+             <input type="text" name="nombre" value="{{isset($inscripcion)?$inscripcion->beneficiario : ''}}">
+             <br>
+             @if(isset($inscripcion) && is_object($inscripcion))
+                 <input type="hidden" name="id" value="{{$inscripcion->id_inscripcion}}">
+                 <input type="hidden" name="programa_id" value="{{$inscripcion->programa_id}}">
+             @elseif(isset($programas))
+
+             <label for="programa">Programa</label>
+             <select name="programa">
+                 @foreach($programas as $programa)
+                     <option value={{ $programa->id_programa}}>
+                         {{ $programa->nombre}}
+                     </option>
+                 @endforeach
+                 @endif
+
+             </select>
+
+
+
+
+
     <br><input type="submit" value="guardar">
 </form>
 </html>
